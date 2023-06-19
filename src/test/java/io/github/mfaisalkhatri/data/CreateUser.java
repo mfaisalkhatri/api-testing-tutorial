@@ -1,5 +1,7 @@
 package io.github.mfaisalkhatri.data;
 
+import org.testng.annotations.Optional;
+
 public class CreateUser {
 
     private String name;

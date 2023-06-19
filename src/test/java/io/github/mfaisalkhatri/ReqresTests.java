@@ -64,5 +64,55 @@ public class ReqresTests {
                 .body("createdAt",notNullValue());
     }
 
+    @Test
+    public void testUpdateUser() {
+        CreateUser newUser = new CreateUser("Steve", "Test Engineer");
+        given().when().log()
+                .all()
+                .body(newUser).contentType(ContentType.JSON)
+                .when()
+                .put(BASE_URL + "/api/users/2")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .body("name", equalTo(newUser.getName()))
+                .body("job", equalTo(newUser.getJob()))
+                .body("updatedAt", notNullValue());
+    }
+
+    @Test
+    public void testUpdatePartialUser() {
+        CreateUser newUser = new CreateUser("John", "SeniorTester");
+        given().when()
+                .log()
+                .all()
+                .body(newUser)
+                .contentType(ContentType.JSON)
+                .when()
+                .patch(BASE_URL + "/api/users/2")
+                .then()
+                .log()
+                .all()
+                .statusCode(200)
+                .body("name", equalTo(newUser.getName()))
+                .body("job", equalTo(newUser.getJob()))
+                .body("updatedAt", notNullValue());
+    }
+    @Test
+    public void testDeleteUser() {
+
+        given().when()
+                .log()
+                .all()
+                .when()
+                .delete(BASE_URL + "/api/users/2")
+                .then()
+                .log()
+                .all()
+                .statusCode(204);
+    }
+
+
 
 }
