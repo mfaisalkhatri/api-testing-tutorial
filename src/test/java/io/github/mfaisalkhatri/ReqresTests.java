@@ -2,6 +2,8 @@ package io.github.mfaisalkhatri;
 
 import io.github.mfaisalkhatri.data.CreateUser;
 import io.restassured.http.ContentType;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -20,6 +22,20 @@ public class ReqresTests extends SetupConfiguration {
                 .statusCode(200).body("page", equalTo(2))
                 .body("data[1].id", equalTo(8))
                 .body("data[1].last_name", equalTo("Ferguson"));
+    }
+
+    @Test
+    public void testGetUserJsonExample() {
+        String responseBody = given ().when ()
+                .queryParam ("page", "2")
+                .get ("/api/users/")
+                .getBody().asString();
+
+        JSONObject jsonObject = new JSONObject(responseBody);
+        JSONArray jsonArray = jsonObject.getJSONArray("data");
+        JSONObject dataObject = jsonArray.getJSONObject(0);
+        String firstName = dataObject.get("first_name").toString();
+        System.out.println(firstName);
     }
 
     @Test
