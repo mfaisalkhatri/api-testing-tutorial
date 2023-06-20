@@ -6,10 +6,10 @@
             <class name="io.github.mfaisalkhatri.ReqresTests">
                 <methods>
                     <include name="testGetUsers"/>
-                    <exclude name="testPostUser"/>
+                    <include name="testPostUser"/>
                     <include name="testPostUser_1"/>
                     <include name="testUpdateUser"/>
-                    <exclude name="testUpdatePartialUser"/>
+                    <include name="testUpdatePartialUser"/>
                     <include name="testDeleteUser"/>
                 </methods>
             </class>
