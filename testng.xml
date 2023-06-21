@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Reqres Test Suite" >
+<suite name="Reqres Test Suite" parallel="methods" thread-count="10">
     <test name="Reqres multiple tests">
         <classes>
             <class name="io.github.mfaisalkhatri.ReqresTests">
@@ -11,6 +11,12 @@
                     <include name="testUpdateUser"/>
                     <include name="testUpdatePartialUser"/>
                     <include name="testDeleteUser"/>
+                    <include name="testGetUsersMultiAssert"/>
+                    <include name="testGetUserJsonExample"/>
+                    <include name="testNumberAssertions"/>
+                    <include name="testStringAssertions"/>
+                    <include name="testHasKeyAssertion"/>
+                    <include name="testNotAssertions"/>
                 </methods>
             </class>
         </classes>
