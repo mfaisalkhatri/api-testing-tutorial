@@ -1,4 +1,4 @@
-package io.github.mfaisalkhatri;
+package io.github.mfaisalkhatri.data;
 
 import io.github.mfaisalkhatri.data.BookingDates;
 import io.github.mfaisalkhatri.data.CreateBookingData;
