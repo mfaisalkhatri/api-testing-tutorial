@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Reqres Test Suite" parallel="methods" thread-count="10">
-    <test name="Reqres multiple tests">
+<suite name="Rest Assured Suite">
+    <test name="Reqres multiple tests" enabled="false">
         <classes>
             <class name="io.github.mfaisalkhatri.ReqresTests">
                 <methods>
@@ -17,6 +17,16 @@
                     <include name="testStringAssertions"/>
                     <include name="testHasKeyAssertion"/>
                     <include name="testNotAssertions"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Restful Booker tests">
+        <classes>
+            <class name="io.github.mfaisalkhatri.RestfulBookerTests">
+                <methods>
+                    <include name="testCreateBooking"/>
+                    <include name="testGetBooking"/>
                 </methods>
             </class>
         </classes>
