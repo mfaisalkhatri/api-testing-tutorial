@@ -4,7 +4,6 @@ import io.github.mfaisalkhatri.data.CreateBookingData;
 import org.testng.annotations.Test;
 
 import static io.github.mfaisalkhatri.data.CreateBookingDataBuilder.getBookingData;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
