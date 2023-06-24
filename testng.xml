@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Rest Assured Suite">
-    <test name="Reqres multiple tests" enabled="false">
+    <test name="Reqres multiple tests">
         <classes>
             <class name="io.github.mfaisalkhatri.ReqresTests">
                 <methods>
