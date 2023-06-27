@@ -18,6 +18,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
 
     steps:
     - uses: actions/checkout@v3
@@ -32,12 +34,6 @@ jobs:
 
     - name: Test Report
       uses: dorny/test-reporter@v1
-      permissions:
-        statuses: write
-        checks: write
-        contents: write
-        pull-requests: write
-        actions: write
       if: always()
       with:
         name: Test Results
