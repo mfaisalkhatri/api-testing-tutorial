@@ -32,6 +32,12 @@ jobs:
 
     - name: Test Report
       uses: dorny/test-reporter@v1
+      permissions:
+        statuses: write
+        checks: write
+        contents: write
+        pull-requests: write
+        actions: write
       if: always()
       with:
         name: Test Results
