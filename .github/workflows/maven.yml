@@ -29,3 +29,11 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: always()
+      with:
+        name: Test Results
+        path: ${{ github.workspace }}/target/surefire-reports/TEST-TestSuite.xml
+        reporter: java-junit
