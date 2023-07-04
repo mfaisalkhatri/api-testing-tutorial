@@ -1,13 +1,28 @@
 package io.github.mfaisalkhatri;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.emptyArray;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.equalToCompressingWhiteSpace;
+import static org.hamcrest.Matchers.equalToIgnoringCase;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.greaterThanOrEqualTo;
+import static org.hamcrest.Matchers.hasKey;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.Matchers.lessThanOrEqualTo;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.startsWith;
+import static org.hamcrest.Matchers.stringContainsInOrder;
+
 import io.github.mfaisalkhatri.data.CreateUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.annotations.Test;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
-import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class ReqresTests extends SetupConfiguration {
 
@@ -207,16 +222,48 @@ public class ReqresTests extends SetupConfiguration {
     }
 
     @Test
-    public void testNotAssertions() {
-        given()
-                .get("/api/users/")
-                .then()
-                .and()
-                .assertThat()
-                .body("data", not(emptyArray()))
-                .body("data[0].first_name", not(equalTo("Vinayak")))
-                .body("data.size()", greaterThan(5));
+    public void testNotAssertions () {
+        given ().get ("/api/users/")
+            .then ()
+            .and ()
+            .assertThat ()
+            .body ("data", not (emptyArray ()))
+            .body ("data[0].first_name", not (equalTo ("Vinayak")))
+            .body ("data.size()", greaterThan (5));
     }
 
+    @Test
+    public void testPathParam () {
+
+        int petId = 1;
+        given ().when ()
+            .pathParams ("petId",petId)
+            .get ("https://petstore.swagger.io/v2/pet/{petId}")
+            .then ()
+            .statusCode (200)
+            .and ()
+            .assertThat ()
+            .body ("id", equalTo (petId));
+    }
+
+    @Test
+    public void testFormParam() {
+        int petId = 1;
+        FileReader fileReader = new FileReader();
+        String fileName = "husky.jpg";
+
+        given().when ().pathParam ("petId", petId)
+            .formParam ("additionalMetadata", "Husky image")
+            .contentType("multipart/form-data")
+            .multiPart(fileReader.fileToUpload(fileName))
+            .when()
+            .post("https://petstore.swagger.io/v2/pet/{petId}/uploadImage")
+            .then()
+            .statusCode(200)
+            .and ()
+            .assertThat ()
+            .body ("code", equalTo(200))
+            .body ("message", containsString ("additionalMetadata: Husky image\nFile uploaded to ./husky.jpg"));
+    }
 
 }
